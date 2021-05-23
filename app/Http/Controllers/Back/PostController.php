@@ -102,8 +102,16 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        if ($post->delete()) {
+            $flash = ['success' => 'データを削除しました。'];
+        } else {
+            $flash = ['error' => 'データの削除に失敗しました。'];
+        }
+
+        return redirect()
+            ->route('back.posts.index')
+            ->with($flash);
     }
 }
