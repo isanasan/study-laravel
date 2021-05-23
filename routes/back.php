@@ -7,3 +7,5 @@ Route::get('/', function () {
 });
 
 Route::get('/', 'Back\DashboardController')->name('dashboard');
+
+Route::resource('Posts', 'Back/PostController')->except('show');
