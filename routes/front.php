@@ -2,6 +2,4 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    echo 'front';
-});
+Route::get('/', 'Front\PostController@index')->name('home');
