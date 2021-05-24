@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Front;
 
+use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,6 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::publicList();
-
         return view('front.posts.index', compact('posts'));
     }
 
@@ -49,7 +49,6 @@ class PostController extends Controller
     public function show(int $id)
     {
         $post = Post::publicFindById($id);
-
         return view('front.posts.show', compact('post'));
     }
 
