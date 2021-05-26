@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Back;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Http\Requests\PostRequest;
-use Redirect;
 
 class PostController extends Controller
 {
@@ -69,7 +67,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
         return view('back.posts.edit',compact('post'));
     }
