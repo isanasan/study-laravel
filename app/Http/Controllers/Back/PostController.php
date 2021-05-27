@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest('id')->paginate(20);
+        $posts = Post::with('user')->latest('id')->paginate(20);
         return view('back.posts.index', compact('posts'));
     }
 
@@ -38,10 +38,10 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         $post = Post::create($request->all());
-        
+
         if ($post) {
             return redirect()
-                ->route('back.posts.edit',$post)
+                ->route('back.posts.edit', $post)
                 ->withSuccess('データを登録しました。');
         } else {
             return redirect()
@@ -69,7 +69,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('back.posts.edit',compact('post'));
+        return view('back.posts.edit', compact('post'));
     }
 
     /**
@@ -84,13 +84,14 @@ class PostController extends Controller
         if ($post->update($request->all())) {
             $flash = ['success' => 'データを更新しました。'];
         } else {
-            $flash = ['error' => 
+            $flash = [
+                'error' =>
                 'データの更新に失敗しました。'
             ];
         }
 
         return redirect()
-            ->route('back.posts.edit',$post)
+            ->route('back.posts.edit', $post)
             ->with($flash);
     }
 
